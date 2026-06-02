@@ -1,5 +1,7 @@
 # Accesibilidad — Lumière Gastronomy
 
+🌐 **Demo en vivo:** [https://lumiere-woad-five.vercel.app/](https://lumiere-woad-five.vercel.app/)
+
 ## Usuario avanzado objetivo
 
 **Perfil:** Usuario con movilidad reducida que navega exclusivamente mediante teclado (*Keyboard-Only Navigation*), sin uso de ratón ni pantalla táctil.
