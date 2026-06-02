@@ -3,12 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta name="description" content="Lumière Gastronomy - Sistema de reservas accesible">
 <title>Lumière Gastronomy - Reservas</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com" rel="preconnect">
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
-<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Source+Serif+4:wght@600;700&family=Lexend+Deca:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/responsivevoice/1.6.0/responsivevoice.min.js"></script>
 <script id="tailwind-config">
   tailwind.config = {
     darkMode: "class",
@@ -216,12 +218,419 @@
   .error-msg.visible {
     display: flex;
   }
+
+  /* Accessibility Menu Styles */
+  .accessibility-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    background: #000000;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+  .accessibility-btn:hover,
+  .accessibility-btn:focus {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  }
+  .accessibility-btn:focus-visible {
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  #accessibility-menu {
+    position: fixed;
+    right: -400px;
+    top: 0;
+    width: 380px;
+    height: 100vh;
+    background: #ffffff;
+    box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+    transition: right 0.3s ease;
+    z-index: 998;
+    overflow-y: auto;
+    border-left: 3px solid #000000;
+  }
+  #accessibility-menu.open {
+    right: 0;
+  }
+  .accessibility-menu-header {
+    background: #000000;
+    color: #ffffff;
+    padding: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #ffffff;
+  }
+  .accessibility-menu-header h2 {
+    font-size: 18px;
+    font-weight: 700;
+    margin: 0;
+  }
+  .accessibility-menu-close {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 24px;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .accessibility-menu-close:focus-visible {
+    outline: 2px solid #ffffff;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .accessibility-menu-content {
+    padding: 20px;
+  }
+  .accessibility-section {
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #e4e2e2;
+  }
+  .accessibility-section:last-child {
+    border-bottom: none;
+  }
+  .accessibility-section-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+  }
+  .accessibility-option {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .accessibility-option input[type="checkbox"],
+  .accessibility-option input[type="radio"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #9e3d19;
+  }
+  .accessibility-option label {
+    cursor: pointer;
+    font-size: 14px;
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    color: #1b1c1c;
+  }
+  .accessibility-option input:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+  .accessibility-slider {
+    width: 100%;
+    padding: 0;
+    cursor: pointer;
+    accent-color: #9e3d19;
+  }
+  .accessibility-slider:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+  .slider-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    margin-bottom: 6px;
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+  }
+  .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 997;
+  }
+  .overlay.open {
+    display: block;
+  }
+
+  /* Text Size Adjustments */
+  body.font-size-small {
+    font-size: 14px;
+  }
+  body.font-size-normal {
+    font-size: 16px;
+  }
+  body.font-size-large {
+    font-size: 18px;
+  }
+  body.font-size-extra-large {
+    font-size: 20px;
+  }
+
+  /* Letter Spacing */
+  body.letter-spacing-normal {
+    letter-spacing: normal;
+  }
+  body.letter-spacing-large {
+    letter-spacing: 0.15em;
+  }
+  body.letter-spacing-extra-large {
+    letter-spacing: 0.25em;
+  }
+
+  /* Line Spacing */
+  body.line-spacing-normal {
+    line-height: 1.5;
+  }
+  body.line-spacing-large {
+    line-height: 1.8;
+  }
+  body.line-spacing-extra-large {
+    line-height: 2.2;
+  }
+
+  /* Dyslexia-friendly font */
+  body.font-dyslexia * {
+    font-family: "Lexend Deca", "Atkinson Hyperlegible Next", sans-serif !important;
+  }
+
+  /* High Contrast Mode */
+  body.high-contrast {
+    background: #ffffff;
+    color: #000000;
+  }
+  body.high-contrast * {
+    border-color: #000000 !important;
+  }
+  body.high-contrast a {
+    text-decoration: underline;
+    color: #0000ff;
+  }
+  body.high-contrast button,
+  body.high-contrast input[type="button"],
+  body.high-contrast input[type="submit"] {
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+  }
+
+  /* Dark Mode */
+  body.dark-mode {
+    background: #1a1a1a;
+    color: #ffffff;
+  }
+  body.dark-mode * {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+  body.dark-mode a {
+    color: #64b5f6;
+  }
+
+  /* Colorblind Filters */
+  body.filter-deuteranopia {
+    filter: url(#deuteranopia-filter);
+  }
+  body.filter-protanopia {
+    filter: url(#protanopia-filter);
+  }
+  body.filter-tritanopia {
+    filter: url(#tritanopia-filter);
+  }
+
+  /* Visual Navigation */
+  body.highlight-links a {
+    background-color: #ffff00;
+    padding: 2px 4px;
+    border-radius: 2px;
+  }
+  body.underline-headings h1,
+  body.underline-headings h2,
+  body.underline-headings h3,
+  body.underline-headings h4,
+  body.underline-headings h5,
+  body.underline-headings h6 {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 4px;
+  }
+
+  @media (max-width: 768px) {
+    #accessibility-menu {
+      width: 100%;
+      right: -100%;
+    }
+  }
 </style>
 </head>
 
 <body class="bg-surface text-on-surface font-body-md antialiased selection:bg-tertiary-fixed-dim selection:text-on-surface">
 
   <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <!-- Colorblind Filter Definitions -->
+  <svg style="display:none;" width="0" height="0">
+    <defs>
+      <filter id="deuteranopia-filter">
+        <feColorMatrix type="matrix" values="0.625 0.375 0     0 0
+                                               0.7   0.3   0     0 0
+                                               0     0.3   0.7   0 0
+                                               0     0     0     1 0"/>
+      </filter>
+      <filter id="protanopia-filter">
+        <feColorMatrix type="matrix" values="0.567 0.433 0     0 0
+                                               0.558 0.442 0     0 0
+                                               0     0.242 0.758 0 0
+                                               0     0     0     1 0"/>
+      </filter>
+      <filter id="tritanopia-filter">
+        <feColorMatrix type="matrix" values="0.95  0.05  0     0 0
+                                               0     0.433 0.567 0 0
+                                               0     0.475 0.525 0 0
+                                               0     0     0     1 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Accessibility Menu Button -->
+  <button class="accessibility-btn" id="accessibility-toggle" aria-label="Abrir menú de accesibilidad" aria-expanded="false" aria-controls="accessibility-menu">
+    <span class="material-symbols-outlined" aria-hidden="true">accessibility</span>
+  </button>
+
+  <!-- Accessibility Menu -->
+  <div class="overlay" id="accessibility-overlay"></div>
+  <nav id="accessibility-menu" aria-label="Menú de accesibilidad" role="region">
+    <div class="accessibility-menu-header">
+      <h2>Accesibilidad</h2>
+      <button class="accessibility-menu-close" id="accessibility-close" aria-label="Cerrar menú de accesibilidad" type="button">
+        <span class="material-symbols-outlined" aria-hidden="true">close</span>
+      </button>
+    </div>
+    <div class="accessibility-menu-content">
+
+      <!-- Text Size Adjustment -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Tamaño de Texto</h3>
+        <div class="slider-label">
+          <span>Pequeño</span>
+          <span id="font-size-value">Normal</span>
+          <span>Grande</span>
+        </div>
+        <input type="range" class="accessibility-slider" id="font-size-slider" min="0" max="3" value="1" step="1" aria-label="Ajustar tamaño de texto">
+      </section>
+
+      <!-- Letter Spacing -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Espaciado de Letras</h3>
+        <div class="slider-label">
+          <span>Normal</span>
+          <span id="letter-spacing-value">Normal</span>
+          <span>Grande</span>
+        </div>
+        <input type="range" class="accessibility-slider" id="letter-spacing-slider" min="0" max="2" value="0" step="1" aria-label="Ajustar espaciado de letras">
+      </section>
+
+      <!-- Line Spacing -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Espaciado de Líneas</h3>
+        <div class="slider-label">
+          <span>Normal</span>
+          <span id="line-spacing-value">Normal</span>
+          <span>Grande</span>
+        </div>
+        <input type="range" class="accessibility-slider" id="line-spacing-slider" min="0" max="2" value="0" step="1" aria-label="Ajustar espaciado de líneas">
+      </section>
+
+      <!-- Dyslexia-friendly Font -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Tipografía</h3>
+        <div class="accessibility-option">
+          <input type="checkbox" id="dyslexia-font" aria-label="Activar fuente amigable para dislexia">
+          <label for="dyslexia-font">Fuente amigable para dislexia</label>
+        </div>
+      </section>
+
+      <!-- Contrast & Colors -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Contraste y Colores</h3>
+        <div class="accessibility-option">
+          <input type="checkbox" id="high-contrast" aria-label="Activar alto contraste">
+          <label for="high-contrast">Alto Contraste</label>
+        </div>
+        <div class="accessibility-option">
+          <input type="checkbox" id="dark-mode" aria-label="Activar modo oscuro">
+          <label for="dark-mode">Modo Oscuro</label>
+        </div>
+      </section>
+
+      <!-- Colorblind Filters -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Filtros de Daltonismo</h3>
+        <div class="accessibility-option">
+          <input type="radio" name="colorblind-filter" id="filter-none" value="none" checked aria-label="Sin filtro de color">
+          <label for="filter-none">Sin filtro</label>
+        </div>
+        <div class="accessibility-option">
+          <input type="radio" name="colorblind-filter" id="filter-deuteranopia" value="deuteranopia" aria-label="Filtro para deuteranopia (ceguera al rojo-verde)">
+          <label for="filter-deuteranopia">Deuteranopia</label>
+        </div>
+        <div class="accessibility-option">
+          <input type="radio" name="colorblind-filter" id="filter-protanopia" value="protanopia" aria-label="Filtro para protanopia (ceguera al rojo-verde)">
+          <label for="filter-protanopia">Protanopia</label>
+        </div>
+        <div class="accessibility-option">
+          <input type="radio" name="colorblind-filter" id="filter-tritanopia" value="tritanopia" aria-label="Filtro para tritanopia (ceguera al azul-amarillo)">
+          <label for="filter-tritanopia">Tritanopia</label>
+        </div>
+      </section>
+
+      <!-- Visual Navigation -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Navegación Visual</h3>
+        <div class="accessibility-option">
+          <input type="checkbox" id="highlight-links" aria-label="Resaltar todos los enlaces">
+          <label for="highlight-links">Resaltar Enlaces</label>
+        </div>
+        <div class="accessibility-option">
+          <input type="checkbox" id="underline-headings" aria-label="Subrayar todos los títulos">
+          <label for="underline-headings">Subrayar Títulos</label>
+        </div>
+      </section>
+
+      <!-- Screen Reader & Text-to-Speech -->
+      <section class="accessibility-section">
+        <h3 class="accessibility-section-title">Lectura de Pantalla</h3>
+        <div class="accessibility-option">
+          <input type="checkbox" id="text-to-speech" aria-label="Activar lectura de texto en voz alta">
+          <label for="text-to-speech">Leer página en voz alta</label>
+        </div>
+        <button id="stop-speech" style="display:none; width:100%; padding:8px; margin-top:8px; background:#9e3d19; color:#fff; border:none; border-radius:4px; cursor:pointer; font-family:inherit; font-weight:700;" aria-label="Detener lectura de voz">
+          Detener Lectura
+        </button>
+      </section>
+
+      <!-- Reset Button -->
+      <section class="accessibility-section" style="border-bottom:none;">
+        <button id="reset-accessibility" style="width:100%; padding:12px; background:#000000; color:#ffffff; border:2px solid #000000; border-radius:4px; cursor:pointer; font-family:'Atkinson Hyperlegible Next', sans-serif; font-weight:700; font-size:14px;" aria-label="Restaurar configuración de accesibilidad a los valores predeterminados">
+          Restaurar Valores Predeterminados
+        </button>
+      </section>
+
+    </div>
+  </nav>
 
   <header class="bg-surface/95 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30">
     <div class="max-w-[1280px] mx-auto px-gutter flex justify-between items-center h-20">
@@ -761,6 +1170,265 @@
       alert('Reserva enviada correctamente. Le contactaremos para confirmar.');
       form.reset();
     });
+  }());
+
+  // Accessibility Menu JavaScript
+  (function () {
+    const accessibilityBtn = document.getElementById('accessibility-toggle');
+    const accessibilityMenu = document.getElementById('accessibility-menu');
+    const accessibilityClose = document.getElementById('accessibility-close');
+    const overlay = document.getElementById('accessibility-overlay');
+
+    // Toggle menu
+    accessibilityBtn.addEventListener('click', () => {
+      const isOpen = accessibilityMenu.classList.contains('open');
+      if (isOpen) {
+        closeAccessibilityMenu();
+      } else {
+        openAccessibilityMenu();
+      }
+    });
+
+    function openAccessibilityMenu() {
+      accessibilityMenu.classList.add('open');
+      overlay.classList.add('open');
+      accessibilityBtn.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      accessibilityClose.focus();
+    }
+
+    function closeAccessibilityMenu() {
+      accessibilityMenu.classList.remove('open');
+      overlay.classList.remove('open');
+      accessibilityBtn.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      accessibilityBtn.focus();
+    }
+
+    accessibilityClose.addEventListener('click', closeAccessibilityMenu);
+    overlay.addEventListener('click', closeAccessibilityMenu);
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && accessibilityMenu.classList.contains('open')) {
+        closeAccessibilityMenu();
+      }
+    });
+
+    // Load preferences from localStorage
+    function loadPreferences() {
+      const fontSize = localStorage.getItem('a11y-font-size') || '1';
+      const letterSpacing = localStorage.getItem('a11y-letter-spacing') || '0';
+      const lineSpacing = localStorage.getItem('a11y-line-spacing') || '0';
+      const dyslexiaFont = localStorage.getItem('a11y-dyslexia-font') === 'true';
+      const highContrast = localStorage.getItem('a11y-high-contrast') === 'true';
+      const darkMode = localStorage.getItem('a11y-dark-mode') === 'true';
+      const colorblindFilter = localStorage.getItem('a11y-colorblind-filter') || 'none';
+      const highlightLinks = localStorage.getItem('a11y-highlight-links') === 'true';
+      const underlineHeadings = localStorage.getItem('a11y-underline-headings') === 'true';
+
+      applyFontSize(parseInt(fontSize));
+      applyLetterSpacing(parseInt(letterSpacing));
+      applyLineSpacing(parseInt(lineSpacing));
+      dyslexiaFont && applyDyslexiaFont();
+      highContrast && applyHighContrast();
+      darkMode && applyDarkMode();
+      colorblindFilter !== 'none' && applyColorblindFilter(colorblindFilter);
+      highlightLinks && applyHighlightLinks();
+      underlineHeadings && applyUnderlineHeadings();
+
+      // Update UI
+      document.getElementById('font-size-slider').value = fontSize;
+      document.getElementById('letter-spacing-slider').value = letterSpacing;
+      document.getElementById('line-spacing-slider').value = lineSpacing;
+      document.getElementById('dyslexia-font').checked = dyslexiaFont;
+      document.getElementById('high-contrast').checked = highContrast;
+      document.getElementById('dark-mode').checked = darkMode;
+      document.getElementById('highlight-links').checked = highlightLinks;
+      document.getElementById('underline-headings').checked = underlineHeadings;
+      document.querySelector(`input[name="colorblind-filter"][value="${colorblindFilter}"]`).checked = true;
+    }
+
+    // Apply settings
+    function applyFontSize(size) {
+      const sizes = ['font-size-small', 'font-size-normal', 'font-size-large', 'font-size-extra-large'];
+      document.body.classList.remove(...sizes);
+      document.body.classList.add(sizes[size]);
+      const labels = ['Pequeño', 'Normal', 'Grande', 'Muy Grande'];
+      document.getElementById('font-size-value').textContent = labels[size];
+      localStorage.setItem('a11y-font-size', size);
+    }
+
+    function applyLetterSpacing(spacing) {
+      const spacings = ['letter-spacing-normal', 'letter-spacing-large', 'letter-spacing-extra-large'];
+      document.body.classList.remove(...spacings);
+      document.body.classList.add(spacings[spacing]);
+      const labels = ['Normal', 'Grande', 'Muy Grande'];
+      document.getElementById('letter-spacing-value').textContent = labels[spacing];
+      localStorage.setItem('a11y-letter-spacing', spacing);
+    }
+
+    function applyLineSpacing(spacing) {
+      const spacings = ['line-spacing-normal', 'line-spacing-large', 'line-spacing-extra-large'];
+      document.body.classList.remove(...spacings);
+      document.body.classList.add(spacings[spacing]);
+      const labels = ['Normal', 'Grande', 'Muy Grande'];
+      document.getElementById('line-spacing-value').textContent = labels[spacing];
+      localStorage.setItem('a11y-line-spacing', spacing);
+    }
+
+    function applyDyslexiaFont() {
+      document.body.classList.add('font-dyslexia');
+      localStorage.setItem('a11y-dyslexia-font', 'true');
+    }
+
+    function removeDyslexiaFont() {
+      document.body.classList.remove('font-dyslexia');
+      localStorage.setItem('a11y-dyslexia-font', 'false');
+    }
+
+    function applyHighContrast() {
+      document.body.classList.add('high-contrast');
+      localStorage.setItem('a11y-high-contrast', 'true');
+    }
+
+    function removeHighContrast() {
+      document.body.classList.remove('high-contrast');
+      localStorage.setItem('a11y-high-contrast', 'false');
+    }
+
+    function applyDarkMode() {
+      document.body.classList.add('dark-mode');
+      localStorage.setItem('a11y-dark-mode', 'true');
+    }
+
+    function removeDarkMode() {
+      document.body.classList.remove('dark-mode');
+      localStorage.setItem('a11y-dark-mode', 'false');
+    }
+
+    function applyColorblindFilter(type) {
+      document.body.classList.remove('filter-deuteranopia', 'filter-protanopia', 'filter-tritanopia');
+      if (type !== 'none') {
+        document.body.classList.add(`filter-${type}`);
+      }
+      localStorage.setItem('a11y-colorblind-filter', type);
+    }
+
+    function applyHighlightLinks() {
+      document.body.classList.add('highlight-links');
+      localStorage.setItem('a11y-highlight-links', 'true');
+    }
+
+    function removeHighlightLinks() {
+      document.body.classList.remove('highlight-links');
+      localStorage.setItem('a11y-highlight-links', 'false');
+    }
+
+    function applyUnderlineHeadings() {
+      document.body.classList.add('underline-headings');
+      localStorage.setItem('a11y-underline-headings', 'true');
+    }
+
+    function removeUnderlineHeadings() {
+      document.body.classList.remove('underline-headings');
+      localStorage.setItem('a11y-underline-headings', 'false');
+    }
+
+    // Event listeners
+    document.getElementById('font-size-slider').addEventListener('input', (e) => {
+      applyFontSize(parseInt(e.target.value));
+    });
+
+    document.getElementById('letter-spacing-slider').addEventListener('input', (e) => {
+      applyLetterSpacing(parseInt(e.target.value));
+    });
+
+    document.getElementById('line-spacing-slider').addEventListener('input', (e) => {
+      applyLineSpacing(parseInt(e.target.value));
+    });
+
+    document.getElementById('dyslexia-font').addEventListener('change', (e) => {
+      e.target.checked ? applyDyslexiaFont() : removeDyslexiaFont();
+    });
+
+    document.getElementById('high-contrast').addEventListener('change', (e) => {
+      e.target.checked ? applyHighContrast() : removeHighContrast();
+    });
+
+    document.getElementById('dark-mode').addEventListener('change', (e) => {
+      e.target.checked ? applyDarkMode() : removeDarkMode();
+    });
+
+    document.querySelectorAll('input[name="colorblind-filter"]').forEach(radio => {
+      radio.addEventListener('change', (e) => {
+        applyColorblindFilter(e.target.value);
+      });
+    });
+
+    document.getElementById('highlight-links').addEventListener('change', (e) => {
+      e.target.checked ? applyHighlightLinks() : removeHighlightLinks();
+    });
+
+    document.getElementById('underline-headings').addEventListener('change', (e) => {
+      e.target.checked ? applyUnderlineHeadings() : removeUnderlineHeadings();
+    });
+
+    // Text-to-Speech
+    document.getElementById('text-to-speech').addEventListener('change', (e) => {
+      const stopBtn = document.getElementById('stop-speech');
+      if (e.target.checked) {
+        stopBtn.style.display = 'block';
+        const text = document.body.innerText;
+        if (typeof responsiveVoice !== 'undefined') {
+          responsiveVoice.speak(text, 'Spanish Female', {
+            onend: () => {
+              e.target.checked = false;
+              stopBtn.style.display = 'none';
+            }
+          });
+        } else {
+          alert('La funcionalidad de lectura de voz no está disponible.');
+          e.target.checked = false;
+        }
+      }
+    });
+
+    document.getElementById('stop-speech').addEventListener('click', () => {
+      if (typeof responsiveVoice !== 'undefined') {
+        responsiveVoice.cancel();
+      }
+      document.getElementById('text-to-speech').checked = false;
+      document.getElementById('stop-speech').style.display = 'none';
+    });
+
+    // Reset button
+    document.getElementById('reset-accessibility').addEventListener('click', () => {
+      document.getElementById('font-size-slider').value = '1';
+      document.getElementById('letter-spacing-slider').value = '0';
+      document.getElementById('line-spacing-slider').value = '0';
+      document.getElementById('dyslexia-font').checked = false;
+      document.getElementById('high-contrast').checked = false;
+      document.getElementById('dark-mode').checked = false;
+      document.getElementById('highlight-links').checked = false;
+      document.getElementById('underline-headings').checked = false;
+      document.getElementById('filter-none').checked = true;
+
+      applyFontSize(1);
+      applyLetterSpacing(0);
+      applyLineSpacing(0);
+      removeDyslexiaFont();
+      removeHighContrast();
+      removeDarkMode();
+      removeHighlightLinks();
+      removeUnderlineHeadings();
+      applyColorblindFilter('none');
+
+      localStorage.clear();
+    });
+
+    // Load preferences on page load
+    loadPreferences();
   }());
   </script>
 </body>
