@@ -12,6 +12,43 @@
 
 ---
 
+## Menú de Accesibilidad Flotante
+
+Botón flotante accesible que permite personalizar la experiencia del usuario según sus necesidades específicas:
+
+### Ajustes de Texto
+- **Tamaño de fuente:** Incrementa o reduce el tamaño del texto en toda la página
+- **Espaciado de letras:** Ajusta el espacio entre caracteres para mejorar legibilidad
+- **Espaciado de líneas:** Modifica la altura de línea del texto
+
+### Tipografía Amigable
+- **Fuente Lexend Deca:** Tipografía diseñada específicamente para usuarios con dislexia, mejorando significativamente la legibilidad
+
+### Contraste y Colores
+- **Alto contraste:** Aumenta el contraste visual de todos los elementos
+- **Modo oscuro:** Activa un tema oscuro para reducir la fatiga visual en ambientes con poca luz
+
+### Filtros de Visión de Color
+- **Deuteranopia:** Simula la falta de percepción del color verde
+- **Protanopia:** Simula la falta de percepción del color rojo
+- **Tritanopia:** Simula la falta de percepción del color azul
+
+### Navegación Visual
+- **Resaltar enlaces:** Destaca visualmente todos los enlaces de la página
+- **Subrayar títulos:** Subraya todos los encabezados (H1, H2, H3, etc.)
+
+### Lectura de Pantalla
+- **Texto a voz (Text-to-Speech):** Función de lectura de pantalla integrada usando ResponsiveVoice API
+
+### Características Técnicas
+- **Persistencia de preferencias:** Todas las configuraciones se guardan automáticamente en localStorage
+- **Botón flotante accesible:** Navegable completamente por teclado (`Tab`, `Enter`, `Escape`)
+- **100% accesible:** ARIA labels, screen reader friendly, compatible con lectores de pantalla
+- **Responsive:** Funciona correctamente en dispositivos móviles y desktop
+- **Restaurar valores predeterminados:** Botón para volver a la configuración original
+
+---
+
 ## Estándares aplicados
 
 | Estándar | Versión | Nivel |

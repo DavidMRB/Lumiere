@@ -368,16 +368,29 @@
 
   /* Text Size Adjustments */
   body.font-size-small {
-    font-size: 14px;
+    font-size: 13px;
   }
   body.font-size-normal {
     font-size: 16px;
   }
   body.font-size-large {
-    font-size: 18px;
+    font-size: 20px;
   }
   body.font-size-extra-large {
-    font-size: 20px;
+    font-size: 24px;
+  }
+
+  /* Apply font size scaling to text elements */
+  body.font-size-large p,
+  body.font-size-large label,
+  body.font-size-large li {
+    font-size: 1.15em;
+  }
+
+  body.font-size-extra-large p,
+  body.font-size-extra-large label,
+  body.font-size-extra-large li {
+    font-size: 1.3em;
   }
 
   /* Letter Spacing */
@@ -385,10 +398,10 @@
     letter-spacing: normal;
   }
   body.letter-spacing-large {
-    letter-spacing: 0.15em;
+    letter-spacing: 0.12em;
   }
   body.letter-spacing-extra-large {
-    letter-spacing: 0.25em;
+    letter-spacing: 0.18em;
   }
 
   /* Line Spacing */
@@ -396,10 +409,23 @@
     line-height: 1.5;
   }
   body.line-spacing-large {
-    line-height: 1.8;
+    line-height: 1.95;
   }
   body.line-spacing-extra-large {
-    line-height: 2.2;
+    line-height: 2.4;
+  }
+
+  /* Apply line spacing to text containers */
+  body.line-spacing-large p,
+  body.line-spacing-large li,
+  body.line-spacing-large label {
+    line-height: 1.95;
+  }
+
+  body.line-spacing-extra-large p,
+  body.line-spacing-extra-large li,
+  body.line-spacing-extra-large label {
+    line-height: 2.4;
   }
 
   /* Dyslexia-friendly font */
@@ -1254,7 +1280,7 @@
       const sizes = ['font-size-small', 'font-size-normal', 'font-size-large', 'font-size-extra-large'];
       document.body.classList.remove(...sizes);
       document.body.classList.add(sizes[size]);
-      const labels = ['Pequeño', 'Normal', 'Grande', 'Muy Grande'];
+      const labels = ['Pequeño (13px)', 'Normal (16px)', 'Grande (20px)', 'Muy Grande (24px)'];
       document.getElementById('font-size-value').textContent = labels[size];
       localStorage.setItem('a11y-font-size', size);
     }
@@ -1263,7 +1289,7 @@
       const spacings = ['letter-spacing-normal', 'letter-spacing-large', 'letter-spacing-extra-large'];
       document.body.classList.remove(...spacings);
       document.body.classList.add(spacings[spacing]);
-      const labels = ['Normal', 'Grande', 'Muy Grande'];
+      const labels = ['Normal', 'Grande (0.12em)', 'Muy Grande (0.18em)'];
       document.getElementById('letter-spacing-value').textContent = labels[spacing];
       localStorage.setItem('a11y-letter-spacing', spacing);
     }
@@ -1272,7 +1298,7 @@
       const spacings = ['line-spacing-normal', 'line-spacing-large', 'line-spacing-extra-large'];
       document.body.classList.remove(...spacings);
       document.body.classList.add(spacings[spacing]);
-      const labels = ['Normal', 'Grande', 'Muy Grande'];
+      const labels = ['Normal (1.5)', 'Grande (1.95)', 'Muy Grande (2.4)'];
       document.getElementById('line-spacing-value').textContent = labels[spacing];
       localStorage.setItem('a11y-line-spacing', spacing);
     }
