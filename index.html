@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html class="light" lang="es">
+<head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Lumière Gastronomy - Reservas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-primary": "#c8c6c5",
+          "surface-container-lowest": "#ffffff",
+          "secondary-container": "#e1dfdb",
+          "on-secondary-fixed-variant": "#474744",
+          "primary-fixed-dim": "#c8c6c5",
+          "on-secondary": "#ffffff",
+          "secondary-fixed": "#e4e2dd",
+          "inverse-surface": "#303030",
+          "surface-variant": "#e4e2e2",
+          "tertiary-fixed-dim": "#ffb598",
+          "on-tertiary": "#ffffff",
+          "background": "#fbf9f8",
+          "on-error-container": "#93000a",
+          "on-error": "#ffffff",
+          "surface-container-highest": "#e4e2e2",
+          "surface-container": "#efeded",
+          "error-container": "#ffdad6",
+          "on-secondary-container": "#63635f",
+          "outline-variant": "#c4c7c7",
+          "on-tertiary-fixed-variant": "#7f2b00",
+          "secondary-fixed-dim": "#c8c6c2",
+          "on-primary-fixed-variant": "#474746",
+          "surface": "#fbf9f8",
+          "on-tertiary-container": "#d06536",
+          "on-primary-container": "#858383",
+          "secondary": "#5e5e5b",
+          "surface-bright": "#fbf9f8",
+          "on-tertiary-fixed": "#370e00",
+          "surface-tint": "#5f5e5e",
+          "primary-fixed": "#e5e2e1",
+          "surface-container-low": "#f5f3f3",
+          "tertiary-fixed": "#ffdbce",
+          "error": "#ba1a1a",
+          "tertiary": "#000000",
+          "on-background": "#1b1c1c",
+          "surface-dim": "#dbdad9",
+          "inverse-on-surface": "#f2f0f0",
+          "on-primary-fixed": "#1c1b1b",
+          "on-surface": "#1b1c1c",
+          "on-surface-variant": "#444748",
+          "on-secondary-fixed": "#1b1c19",
+          "primary": "#000000",
+          "outline": "#747878",
+          "primary-container": "#1c1b1b",
+          "on-primary": "#ffffff",
+          "surface-container-high": "#eae8e7",
+          "tertiary-container": "#370e00"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.125rem",
+          "lg": "0.25rem",
+          "xl": "0.5rem",
+          "full": "0.75rem"
+        },
+        "spacing": {
+          "touch-target-min": "44px",
+          "gutter": "32px",
+          "stack-md": "48px",
+          "stack-lg": "80px",
+          "container-max": "1280px",
+          "base": "8px",
+          "margin-mobile": "20px",
+          "stack-sm": "24px"
+        },
+        "fontFamily": {
+          "body-lg": ["Atkinson Hyperlegible Next"],
+          "body-md": ["Atkinson Hyperlegible Next"],
+          "headline-md": ["Source Serif 4"],
+          "label-caps": ["Atkinson Hyperlegible Next"],
+          "display-lg-mobile": ["Source Serif 4"],
+          "display-lg": ["Source Serif 4"]
+        },
+        "fontSize": {
+          "body-lg": ["20px", { "lineHeight": "1.6", "fontWeight": "400" }],
+          "body-md": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+          "headline-md": ["32px", { "lineHeight": "1.3", "fontWeight": "600" }],
+          "label-caps": ["14px", { "lineHeight": "1.0", "letterSpacing": "0.1em", "fontWeight": "700" }],
+          "display-lg-mobile": ["40px", { "lineHeight": "1.2", "fontWeight": "700" }],
+          "display-lg": ["64px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+        }
+      },
+    },
+  }
+</script>
+<style>
+  .skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: #000000;
+    color: #ffffff;
+    padding: 8px 16px;
+    z-index: 200;
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    border-radius: 0 0 4px 0;
+  }
+  .skip-link:focus {
+    top: 0;
+    outline: 3px solid #ffffff;
+    outline-offset: 2px;
+  }
+
+  .focus-ring {
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+  }
+  .focus-ring:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid #000000 !important;
+    outline-offset: 0px;
+    border-color: #000000 !important;
+
+    box-shadow: none !important;
+  }
+
+  .form-input-border {
+    border-color: #767676 !important;
+  }
+
+  .price-label {
+    color: #8a3d10 !important;
+  }
+
+  html {
+    scroll-padding-top: 88px;
+  }
+
+  #mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  #mobile-menu.open {
+    display: flex;
+    flex-direction: column;
+  }
+  #mobile-menu-panel {
+    background: #fbf9f8;
+    width: 100%;
+    padding: 24px 32px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  #mobile-menu-panel a {
+    display: flex;
+    align-items: center;
+    height: 52px;
+    font-family: "Atkinson Hyperlegible Next", sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #000000;
+    text-decoration: none;
+    border-radius: 4px;
+    padding: 0 8px;
+  }
+  #mobile-menu-panel a:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+  #mobile-menu-close {
+    align-self: flex-end;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+  }
+  #mobile-menu-close:focus-visible {
+    outline: 2px solid #000000;
+    outline-offset: 2px;
+  }
+
+  .input-error {
+    border-color: #ba1a1a !important;
+  }
+  .error-msg {
+    display: none;
+    margin-top: 4px;
+    font-size: 14px;
+    color: #ba1a1a;
+    align-items: center;
+    gap: 4px;
+  }
+  .error-msg.visible {
+    display: flex;
+  }
+</style>
+</head>
+
+<body class="bg-surface text-on-surface font-body-md antialiased selection:bg-tertiary-fixed-dim selection:text-on-surface">
+
+  <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
+  <header class="bg-surface/95 backdrop-blur-md sticky top-0 z-50 border-b border-outline-variant/30">
+    <div class="max-w-[1280px] mx-auto px-gutter flex justify-between items-center h-20">
+      <a
+        aria-label="Lumière Gastronomy — Inicio"
+        class="font-display-lg text-display-lg tracking-tight text-primary focus-ring"
+        href="#"
+      >LUMIÈRE</a>
+
+      <nav aria-label="Navegación principal" class="hidden md:flex items-center gap-gutter">
+        <a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors focus-ring" href="#experiencia">Experiencia</a>
+        <a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors focus-ring" href="#menu">Menú</a>
+        <a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors focus-ring" href="#eventos">Eventos</a>
+        <a class="font-label-caps text-label-caps text-secondary hover:text-primary transition-colors focus-ring" href="#privado">Cena Privada</a>
+      </nav>
+
+      <a
+        class="hidden md:flex bg-[#9e3d19] hover:bg-[#7d2f12] text-white font-label-caps text-label-caps h-touch-target-min items-center px-6 rounded focus-ring transition-colors"
+        href="#reservas"
+      >Reserva una mesa</a>
+
+      <button
+        id="menu-toggle"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-haspopup="dialog"
+        aria-label="Abrir menú de navegación"
+        class="md:hidden flex items-center justify-center h-touch-target-min w-touch-target-min text-primary focus-ring"
+        type="button"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true">menu</span>
+      </button>
+    </div>
+  </header>
+
+  <div
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Menú de navegación"
+  >
+    <div id="mobile-menu-panel">
+      <button
+        id="mobile-menu-close"
+        aria-label="Cerrar menú de navegación"
+        type="button"
+      >
+        <span class="material-symbols-outlined" aria-hidden="true" style="font-size:24px;">close</span>
+      </button>
+      <nav aria-label="Navegación principal mobile">
+        <a href="#experiencia" class="focus-ring" style="display:flex;align-items:center;height:52px;font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.1em;color:#000;text-decoration:none;border-radius:4px;padding:0 8px;">Experiencia</a>
+        <a href="#menu"        class="focus-ring" style="display:flex;align-items:center;height:52px;font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.1em;color:#000;text-decoration:none;border-radius:4px;padding:0 8px;">Menú</a>
+        <a href="#eventos"     class="focus-ring" style="display:flex;align-items:center;height:52px;font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.1em;color:#000;text-decoration:none;border-radius:4px;padding:0 8px;">Eventos</a>
+        <a href="#privado"     class="focus-ring" style="display:flex;align-items:center;height:52px;font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.1em;color:#000;text-decoration:none;border-radius:4px;padding:0 8px;">Cena Privada</a>
+        <a href="#reservas"    class="focus-ring" style="display:flex;align-items:center;height:52px;font-family:'Atkinson Hyperlegible Next',sans-serif;font-size:14px;font-weight:700;letter-spacing:0.1em;color:#9e3d19;text-decoration:none;border-radius:4px;padding:0 8px;">Reservar mesa</a>
+      </nav>
+    </div>
+    <div aria-hidden="true" style="flex:1;cursor:pointer;" id="mobile-menu-overlay"></div>
+  </div>
+
+  <main id="main-content" tabindex="-1" style="outline:none;">
+
+    <section aria-labelledby="hero-heading" class="relative min-h-[819px] flex items-center justify-center overflow-hidden">
+      <div class="absolute inset-0 z-0">
+        <img
+          alt="Comedor de alta cocina iluminado suavemente, con mesas impecablemente puestas con manteles blancos, cristalería brillante y cubiertos relucientes. Tonos crema cálidos, maderas oscuras y luces suaves crean una atmósfera elegante y acogedora."
+          aria-hidden="true"
+          class="w-full h-full object-cover opacity-80"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBb6LO-sPve5kOzLXKMI6EjlyH4wytsfTRBU7W0oNPCQ_9vBqH4pOfcAZx5KaHepf4jZ0eQ86yD0y6iJ2sGhxdBB42zecOwRyVYonEtcA8behzPpduEQaBGCOWCyQb8TrkJD-FntixbtIYQBRvHRdUx4olEm_GrGkNfRUaLKKhfoez5GWr_JOVLMtN2uzEAgIeyl_R569AO3sMZbA5RWUqgysJ5PYHi6miL1tyczf7nI5L9Fy-DifmJhy2-5AqzeC-k59xHS76ZFr0"
+        >
+        <div aria-hidden="true" class="absolute inset-0 bg-black/40 mix-blend-multiply"></div>
+      </div>
+      <div class="relative z-10 max-w-container-max mx-auto px-gutter text-center text-white">
+        <h1 class="font-display-lg text-display-lg md:text-[80px] leading-tight mb-stack-sm drop-shadow-lg" id="hero-heading">
+          Una Experiencia Sensorial Inolvidable
+        </h1>
+        <p class="font-body-lg text-body-lg mb-stack-md max-w-2xl mx-auto drop-shadow-md">
+          Descubra la perfecta armonía entre tradición culinaria y elegancia moderna en el corazón de la ciudad.
+        </p>
+        <a
+          class="inline-flex bg-[#9e3d19] hover:bg-[#7d2f12] text-white font-label-caps text-label-caps h-[56px] items-center px-10 rounded focus-ring transition-colors shadow-lg"
+          href="#reservas"
+        >Reservar Mesa</a>
+      </div>
+    </section>
+
+    <section aria-labelledby="values-heading" class="py-stack-lg max-w-container-max mx-auto px-gutter" id="experiencia">
+      <h2 class="font-headline-md text-headline-md text-center mb-stack-md text-primary" id="values-heading">Nuestros Valores</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+        <div class="bg-surface-container-lowest p-stack-sm rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center">
+          <div aria-hidden="true" class="h-16 w-16 bg-surface-container rounded-full flex items-center justify-center mb-base text-on-tertiary-container">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">restaurant</span>
+          </div>
+          <h3 class="font-label-caps text-label-caps mb-base text-primary">Excelencia Culinaria</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">Ingredientes de origen local transformados con maestría técnica para deleitar el paladar.</p>
+        </div>
+        <div class="bg-surface-container-lowest p-stack-sm rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center">
+          <div aria-hidden="true" class="h-16 w-16 bg-surface-container rounded-full flex items-center justify-center mb-base text-on-tertiary-container">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">accessible</span>
+          </div>
+          <h3 class="font-label-caps text-label-caps mb-base text-primary">Espacio Inclusivo</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">Diseñado sin barreras, asegurando que cada huésped disfrute de una experiencia cómoda y digna.</p>
+        </div>
+        <div class="bg-surface-container-lowest p-stack-sm rounded-lg shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant flex flex-col items-center text-center">
+          <div aria-hidden="true" class="h-16 w-16 bg-surface-container rounded-full flex items-center justify-center mb-base text-on-tertiary-container">
+            <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1;">eco</span>
+          </div>
+          <h3 class="font-label-caps text-label-caps mb-base text-primary">Sostenibilidad</h3>
+          <p class="font-body-md text-body-md text-on-surface-variant">Compromiso con prácticas responsables que respetan nuestro entorno y comunidad.</p>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="menu-heading" class="py-stack-lg bg-surface-container-low" id="menu">
+      <div class="max-w-container-max mx-auto px-gutter">
+        <h2 class="font-headline-md text-headline-md text-center mb-stack-md text-primary" id="menu-heading">Nuestra Selección</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+
+          <article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] focus-within:ring-2 focus-within:ring-primary">
+            <div class="h-64 relative">
+              <img
+                alt="Lomo de ciervo ahumado emplatado con precisión: carne perfectamente cocinada con reducción brillante de vino tinto, puré de castañas y microbrotes sobre plato blanco minimalista."
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDv0Y8YDH9jN03qi8jEWs2C7nZ70QnPX4YVZLFkbZ5be8vIHB3dO3JR0ZUY_m7T5dP_V9T8jPVAYJ2PDxNk27y01Y_nuGP2RjpRi6PkYVPLOwKsMkfoi3ChL5BhajIl8lBhYhrDTYx1iwnTmdq3Afo4iUO9M2Gqetmh7SMgYW4oVrbE8zaOYMii5mlXGXi4g8TvjRngn4sfFjg1cy4bOvl_4Iefn4qKSyU0u0YU1SfRaMzjmY95eFIHNMvGurmTVyP-yS0iQz3jzF4"
+              >
+            </div>
+            <div class="p-stack-sm">
+              <h3 class="font-headline-md text-headline-md text-[24px] mb-2 text-primary">Lomo de Ciervo Ahumado</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Acompañado de puré de castañas, frutos rojos silvestres y una reducción de vino tinto envejecido.</p>
+              <p aria-label="Precio: 45.000 pesos" class="font-label-caps text-label-caps price-label">$45.000</p>
+            </div>
+          </article>
+
+          <article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] focus-within:ring-2 focus-within:ring-primary">
+            <div class="h-64 relative">
+              <img
+                alt="Vieiras salvajes doradas servidas sobre crema de coliflor avainillada, con esferificaciones de cítricos y hierbas frescas. Presentación elegante bajo luz natural suave."
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG37LbLZt3ntoJvJQyH0z41bE4t68KVoalCczwU3oES_e75HM4lVtzIA4cdGZ4JrI2_77ZC4WonmTXb6EecbvQ_YTJQ1qstvOMRYAX1qlnu09llySl3MfsgIYnyIVEhQ1LLisdLQhXfwXVbTwAHNHsBtjpupXHVND7btb8Gg-zGd_0D2fJ3TS7aPBeXS0dYDCXVI-dqsT0-icokmtfNs2Xhw4U77xOaBd_ZvVBnavYMoBMHWjA8fJAjquIeOu21gs6_zYIF6WFs_E"
+              >
+            </div>
+            <div class="p-stack-sm">
+              <h3 class="font-headline-md text-headline-md text-[24px] mb-2 text-primary">Vieiras Salvajes</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Selladas a la perfección, sobre crema de coliflor avainillada y caviar de cítricos.</p>
+              <p aria-label="Precio: 38.000 pesos" class="font-label-caps text-label-caps price-label">$38.000</p>
+            </div>
+          </article>
+
+          <article class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.04)] focus-within:ring-2 focus-within:ring-primary">
+            <div class="h-64 relative">
+              <img
+                alt="Postre Sinfonía de Cacao: presentación vanguardista con capas de chocolate negro texturizado, hojas de oro comestible y salsas de colores dispuestas asimétricamente. Iluminación dramática sobre mesa oscura."
+                class="w-full h-full object-cover"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuDS0cD0fx2cQwISgcfVQwsdsArPc8WUxt7TXQ_DXaIv_5TlPop5ld0sl_R9k18Ax3PeU53eGHkm4PMRBDkmFrP31rJAGfUxjZmHpOoFvwAJ5Ac9xn1Qpr-LWUORqDQyk1P_bnSj4sr7cjUZmA8NaYp2A-jgMGsV-F1WjM2Xh4DR7wV5qjHefLQ9T_JY0ymxa2u7-SlrsYqmYkpKsgOa7ZRWAJVm5VUqbYNv3bChZDT-VrLeZOgo0Tbf06zfD_1XvP9n-beR5nn2QaY"
+              >
+            </div>
+            <div class="p-stack-sm">
+              <h3 class="font-headline-md text-headline-md text-[24px] mb-2 text-primary">Sinfonía de Cacao</h3>
+              <p class="font-body-md text-body-md text-on-surface-variant mb-4">Texturas de chocolate negro de origen único, esponja de avellana y helado de haba tonka.</p>
+              <p aria-label="Precio: 18.000 pesos" class="font-label-caps text-label-caps price-label">$18.000</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="reservation-heading" class="py-stack-lg max-w-3xl mx-auto px-gutter" id="reservas">
+      <div class="bg-surface-container-lowest p-stack-md rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.04)] border border-surface-variant">
+        <h2 class="font-headline-md text-headline-md mb-stack-sm text-primary text-center" id="reservation-heading">Reserve su Mesa</h2>
+
+        <form id="reservation-form" action="#" class="space-y-6" method="POST" novalidate>
+
+          <p class="font-body-md text-[14px] text-on-surface-variant">
+            Los campos marcados con <span aria-hidden="true" style="color:#ba1a1a;font-weight:700;">*</span>
+            <span class="sr-only">asterisco</span> son obligatorios.
+          </p>
+
+          <div
+            id="form-error-summary"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+            class="hidden bg-red-50 border border-red-300 rounded p-4"
+          >
+            <p class="font-label-caps text-label-caps" style="color:#ba1a1a;">Por favor, corrija los siguientes errores:</p>
+            <ul id="error-list" class="mt-2 font-body-md text-[14px]" style="color:#ba1a1a; padding-left:1.2em; list-style:disc;"></ul>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <div>
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="name">
+                Nombre Completo <span aria-hidden="true" style="color:#ba1a1a;">*</span>
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                required
+                aria-required="true"
+                aria-describedby="name-error"
+                placeholder="Ej. María García"
+                class="form-input-border w-full h-touch-target-min bg-surface border-2 rounded px-4 font-body-md text-body-md transition-colors"
+              >
+              <p class="error-msg" id="name-error" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">error</span>
+                Ingrese su nombre completo.
+              </p>
+            </div>
+
+            <div>
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="email">
+                Correo Electrónico <span aria-hidden="true" style="color:#ba1a1a;">*</span>
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                required
+                aria-required="true"
+                aria-describedby="email-error"
+                placeholder="correo@ejemplo.com"
+                class="form-input-border w-full h-touch-target-min bg-surface border-2 rounded px-4 font-body-md text-body-md transition-colors"
+              >
+              <p class="error-msg" id="email-error" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">error</span>
+                Ingrese un correo electrónico válido.
+              </p>
+            </div>
+
+            <div>
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="date">
+                Fecha <span aria-hidden="true" style="color:#ba1a1a;">*</span>
+              </label>
+              <input
+                id="date"
+                name="date"
+                type="date"
+                required
+                aria-required="true"
+                aria-describedby="date-hint date-error"
+                class="form-input-border w-full h-touch-target-min bg-surface border-2 rounded px-4 font-body-md text-body-md transition-colors"
+              >
+              <p class="mt-1 font-body-md text-[13px] text-on-surface-variant" id="date-hint">
+                Solo se pueden reservar fechas desde hoy en adelante.
+              </p>
+              <p class="error-msg" id="date-error" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">error</span>
+                Seleccione una fecha válida.
+              </p>
+            </div>
+
+            <div>
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="time">
+                Hora <span aria-hidden="true" style="color:#ba1a1a;">*</span>
+              </label>
+              <select
+                id="time"
+                name="time"
+                required
+                aria-required="true"
+                aria-describedby="time-error"
+                class="form-input-border w-full h-touch-target-min bg-surface border-2 rounded px-4 font-body-md text-body-md transition-colors"
+              >
+                <option value="" disabled selected>Seleccione hora</option>
+                <option value="19:00">19:00</option>
+                <option value="19:30">19:30</option>
+                <option value="20:00">20:00</option>
+                <option value="20:30">20:30</option>
+                <option value="21:00">21:00</option>
+                <option value="21:30">21:30</option>
+              </select>
+              <p class="error-msg" id="time-error" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">error</span>
+                Seleccione una hora para su reserva.
+              </p>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="guests">
+                Número de Comensales <span aria-hidden="true" style="color:#ba1a1a;">*</span>
+              </label>
+              <select
+                id="guests"
+                name="guests"
+                required
+                aria-required="true"
+                aria-describedby="guests-error"
+                class="form-input-border w-full h-touch-target-min bg-surface border-2 rounded px-4 font-body-md text-body-md transition-colors"
+              >
+                <option value="1">1 Persona</option>
+                <option value="2" selected>2 Personas</option>
+                <option value="3">3 Personas</option>
+                <option value="4">4 Personas</option>
+                <option value="5">5 Personas</option>
+                <option value="6+">6 o más (Contactar restaurante)</option>
+              </select>
+              <p class="error-msg" id="guests-error" role="alert">
+                <span class="material-symbols-outlined" aria-hidden="true" style="font-size:16px;">error</span>
+                Seleccione el número de comensales.
+              </p>
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block font-label-caps text-label-caps text-primary mb-2" for="requirements">
+                Requisitos Especiales / Accesibilidad
+              </label>
+              <textarea
+                id="requirements"
+                name="requirements"
+                rows="3"
+                aria-describedby="requirements-hint"
+                placeholder="Por favor, indíquenos si necesita espacio para silla de ruedas, tiene alergias, o cualquier otra necesidad para hacer su visita perfecta."
+                class="form-input-border w-full bg-surface border-2 rounded p-4 font-body-md text-body-md transition-colors resize-none"
+              ></textarea>
+              <p class="mt-1 font-body-md text-[14px] text-on-surface-variant" id="requirements-hint">
+                Opcional. Ayúdenos a preparar su visita adecuadamente.
+              </p>
+            </div>
+
+          </div>
+
+          <div class="mt-stack-sm flex justify-center">
+            <button
+              type="submit"
+              class="focus-ring w-full md:w-auto min-w-[200px] bg-[#9e3d19] hover:bg-[#7d2f12] text-white font-label-caps text-label-caps h-[56px] flex items-center justify-center px-10 rounded transition-colors shadow-sm"
+            >Confirmar Reserva</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-surface-container-highest pt-stack-lg pb-stack-sm full-width">
+    <div class="max-w-[1280px] mx-auto px-gutter grid grid-cols-1 md:grid-cols-4 gap-base">
+      <div class="mb-stack-sm md:mb-0">
+        <span class="font-headline-md text-headline-md text-primary block mb-4">LUMIÈRE</span>
+        <p class="font-body-md text-body-md text-on-surface">
+          © 2024 Lumière Gastronomy.
+          <span lang="en">All rights reserved.</span>
+        </p>
+      </div>
+      <div class="flex flex-col gap-2">
+        <a lang="en" class="font-body-md text-body-md text-secondary hover:text-primary transition-colors focus-ring w-fit h-touch-target-min flex items-center" href="#">Accessibility Statement</a>
+        <a lang="en" class="font-body-md text-body-md text-secondary hover:text-primary transition-colors focus-ring w-fit h-touch-target-min flex items-center" href="#">Privacy Policy</a>
+      </div>
+      <div class="flex flex-col gap-2">
+        <a lang="en" class="font-body-md text-body-md text-secondary hover:text-primary transition-colors focus-ring w-fit h-touch-target-min flex items-center" href="#">Terms of Service</a>
+        <a lang="en" class="font-body-md text-body-md text-secondary hover:text-primary transition-colors focus-ring w-fit h-touch-target-min flex items-center" href="#">Press Kit</a>
+      </div>
+      <div class="flex items-start md:justify-end"></div>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    const toggle    = document.getElementById('menu-toggle');
+    const menu      = document.getElementById('mobile-menu');
+    const closeBtn  = document.getElementById('mobile-menu-close');
+    const overlay   = document.getElementById('mobile-menu-overlay');
+    const menuIcon  = toggle.querySelector('.material-symbols-outlined');
+
+    function getFocusable() {
+      return Array.from(
+        menu.querySelectorAll('button, a, [tabindex]:not([tabindex="-1"])')
+      ).filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
+    }
+
+    function openMenu() {
+      menu.classList.add('open');
+      toggle.setAttribute('aria-expanded', 'true');
+      toggle.setAttribute('aria-label', 'Cerrar menú de navegación');
+      menuIcon.textContent = 'close';
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeMenu() {
+      menu.classList.remove('open');
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir menú de navegación');
+      menuIcon.textContent = 'menu';
+      document.body.style.overflow = '';
+      toggle.focus();
+    }
+
+    toggle.addEventListener('click', () => {
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+
+    menu.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+        return;
+      }
+      if (e.key !== 'Tab') return;
+
+      const focusable = getFocusable();
+      const first = focusable[0];
+      const last  = focusable[focusable.length - 1];
+
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else {
+        if (document.activeElement === last) {
+          e.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+
+    menu.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+  }());
+
+  (function () {
+    const form        = document.getElementById('reservation-form');
+    const summary     = document.getElementById('form-error-summary');
+    const errorList   = document.getElementById('error-list');
+
+    const fields = [
+      {
+        id: 'name',
+        errorId: 'name-error',
+        validate: (el) => el.value.trim().length >= 2,
+        errorText: 'Ingrese su nombre completo.',
+        summaryText: 'Nombre completo es obligatorio.',
+        event: 'input'
+      },
+      {
+        id: 'email',
+        errorId: 'email-error',
+        validate: (el) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim()),
+        errorText: 'Ingrese un correo electrónico válido.',
+        summaryText: 'El correo electrónico no es válido.',
+        event: 'input'
+      },
+      {
+        id: 'date',
+        errorId: 'date-error',
+        validate: (el) => {
+          if (!el.value) return false;
+          const selected = new Date(el.value);
+          const today    = new Date();
+          today.setHours(0, 0, 0, 0);
+          return selected >= today;
+        },
+        errorText: 'Seleccione una fecha válida (desde hoy en adelante).',
+        summaryText: 'La fecha seleccionada no es válida.',
+        event: 'change'
+      },
+      {
+        id: 'time',
+        errorId: 'time-error',
+        validate: (el) => el.value !== '',
+        errorText: 'Seleccione una hora para su reserva.',
+        summaryText: 'Debe seleccionar una hora.',
+        event: 'change'
+      }
+    ];
+
+    const dateInput = document.getElementById('date');
+    if (dateInput) {
+      const today = new Date().toISOString().split('T')[0];
+      dateInput.setAttribute('min', today);
+    }
+
+    function setError(field, inputEl) {
+      const errorEl = document.getElementById(field.errorId);
+      inputEl.setAttribute('aria-invalid', 'true');
+      inputEl.classList.add('input-error');
+      if (errorEl) {
+        errorEl.classList.add('visible');
+      }
+    }
+
+    function clearError(field, inputEl) {
+      const errorEl = document.getElementById(field.errorId);
+      inputEl.removeAttribute('aria-invalid');
+      inputEl.classList.remove('input-error');
+      if (errorEl) {
+        errorEl.classList.remove('visible');
+      }
+    }
+
+
+    fields.forEach(field => {
+      const inputEl = document.getElementById(field.id);
+      if (!inputEl) return;
+      inputEl.addEventListener(field.event, () => {
+        if (field.validate(inputEl)) {
+          clearError(field, inputEl);
+        }
+      });
+    });
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const invalidFields = [];
+
+      fields.forEach(field => {
+        const inputEl = document.getElementById(field.id);
+        if (!inputEl) return;
+        if (!field.validate(inputEl)) {
+          setError(field, inputEl);
+          invalidFields.push(field);
+        } else {
+          clearError(field, inputEl);
+        }
+      });
+
+      if (invalidFields.length > 0) {
+        summary.classList.remove('hidden');
+        errorList.innerHTML = invalidFields
+          .map(f => `<li>${f.summaryText}</li>`)
+          .join('');
+
+        const firstInvalid = document.getElementById(invalidFields[0].id);
+        if (firstInvalid) firstInvalid.focus();
+        return;
+      }
+
+      summary.classList.add('hidden');
+      errorList.innerHTML = '';
+
+      alert('Reserva enviada correctamente. Le contactaremos para confirmar.');
+      form.reset();
+    });
+  }());
+  </script>
+</body>
+</html>
